@@ -1,10 +1,10 @@
 <script>
-    import fastapi from "../lib/api";
+    import fastapi from "../lib/api"
     let question_list = []
 
-    function get_question_list(){
-        fastapi('get', '/api/question/list', {}, (json)=>{
-            question_list = json;
+    function get_question_list() {
+        fastapi('get', '/api/question/list', {}, (json) => {
+            question_list = json
         })
     }
 
