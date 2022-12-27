@@ -4,6 +4,8 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from domain.question import question_router
+
 app = FastAPI() # FastAPI 클래스로 생성한 app객체가 바로 FastAPI의 핵심 객체이다. 모든 동작은 이 객체로부터 비롯된다.
 
 # cors 헤더
@@ -20,6 +22,4 @@ app.add_middleware(
 )
 
 
-@app.get('/hello')
-def hello():
-    return {"message":"안녕하세요 파이보"}
+app.include_router(question_router.router)
