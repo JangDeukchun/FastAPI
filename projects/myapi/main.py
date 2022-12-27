@@ -1,3 +1,6 @@
+# 파이보 프로젝트를 설정하는 main.py 파일
+# main.py 파일에 생성한 app 객체는 FastAPI의 핵심 객체이다. app 객체를 통해 FastAPI의 설정을 할 수 있다. main.py는 FastAPI 프로젝트의 전체적인 환경을 설정하는 파일이다.
+
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
