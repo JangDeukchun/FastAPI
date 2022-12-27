@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from database import SessionLocal, get_db
-from domain.question import question_schema
+from domain.question import question_schema, question_crud
 from models import Question
 
 
@@ -14,7 +14,7 @@ router = APIRouter( # 라우터 파일에 반드시 필요한 것은 APIRouter �
 @router.get("/list", response_model = list[question_schema.Question])
 def question_list():
     with get_db() as db:
-        _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
+        _question_list = question_crud.get_question_list(db)
     return _question_list
 
 
