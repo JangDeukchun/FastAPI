@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from database import SessionLocal, get_db
+from domain.question import question_schema
 from models import Question
 
 
@@ -10,7 +11,7 @@ router = APIRouter( # 라우터 파일에 반드시 필요한 것은 APIRouter �
 )
 
 # 오류 여부에 상관없이 with문을 벗어나는 순간 db.close()가 실행되므로 보다 안전한 코드로 변경된 것이다.
-@router.get("/list")
+@router.get("/list", response_model = list[question_schema.Question])
 def question_list():
     with get_db() as db:
         _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
