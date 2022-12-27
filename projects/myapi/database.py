@@ -1,3 +1,5 @@
+import contextlib
+
 # database.py 파일은 데이터베이스와 관련된 설정을 하는 파일이다. 이 파일에는 데이터베이스를 사용하기 위한 변수, 함수등을 정의하고 접속할 데이터베이스의 주소와 사용자, 비밀번호등을 관리한다.
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base # 데이터베이스 모델을 구성할 때 사용되는 클래스
@@ -18,3 +20,13 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 Base = declarative_base() # 데이터베이스 모델을 구성할 때 사용되는 클래스
+
+
+# 프로그래밍에서 "Dependency Injection(의존성 주입)"의 뜻은 필요한 기능을 선언하여 사용할 수 있다는 의미이다.
+@contextlib.contextmanager
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
