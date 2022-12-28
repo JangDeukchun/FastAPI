@@ -4,6 +4,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from domain.answer   import answer_router
 from domain.question import question_router
 
 app = FastAPI() # FastAPI 클래스로 생성한 app객체가 바로 FastAPI의 핵심 객체이다. 모든 동작은 이 객체로부터 비롯된다.
@@ -23,3 +24,4 @@ app.add_middleware(
 
 
 app.include_router(question_router.router)
+app.include_router(answer_router.router)
